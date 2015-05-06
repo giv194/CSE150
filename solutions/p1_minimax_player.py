@@ -14,6 +14,45 @@ class MinimaxPlayer(Player):
         Returns:
             the next move (Action)
         """
-        print state.actions()
-        # TODO implement this
-        return state.actions()[0]
+        moves = state.actions()
+        best_move = state.actions()[0]
+        best_util = -2
+        for move in moves:
+        	next_state = state.result(move)
+        	current_util = min_turn(self, next_state)
+        	if current_util > best_util:
+        		best_move = move
+        		best_util = current_util
+        return best_move
+
+    def max_turn(self, state):
+    	if state.is_terminal():
+    		return state.utility()
+    	moves = state.actions()
+    	best_util = -2
+    	for move in moves:
+        	next_state = state.result(move)
+        	current_util = min_turn(self, next_state)
+        	if current_util > best_util:
+        		best_move = move
+        		best_util = current_util
+        return best_util
+
+
+    def min_turn(self, state):
+    	if state.is_terminal():
+    		return state.utility()
+    	moves = state.actions()
+    	best_util = 2
+    	for move in moves:
+        	next_state = state.result(move)
+        	current_util = max_turn(next_state)
+        	if current_util < best_util:
+        		best_move = move
+        		best_util = current_util
+        return best_util
+
+
+
+
+
