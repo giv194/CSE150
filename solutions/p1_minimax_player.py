@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Sivasubramanian Chandrasegarampillai, Walter Curnow'
-__email__ = 'rchandra@uci.edu,wcurnow@uci.edu'
+__author__ = 'krudenko@ucsd.edu, kdduong@ucsd.edu, a9dang@ucsd.edu'
 
 from assignment2 import Player, State, Action
 
