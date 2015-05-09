@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Sivasubramanian Chandrasegarampillai, Walter Curnow'
-__email__ = 'rchandra@uci.edu,wcurnow@uci.edu'
-
+__author__ = 'krudenko@ucsd.edu, kdduong@ucsd.edu, a9dang@ucsd.edu'
 import heapq
 
 from assignment2 import Player
@@ -17,8 +15,6 @@ class EvaluationPlayer(Player):
         Returns:
             the next move (Action)
         """
-
-        # *You do not need to modify this method.*
         best_move = None
         max_value = -1.0
         my_color = state.to_play.color
@@ -54,9 +50,9 @@ class EvaluationPlayer(Player):
         #iterate through the board:
         for i in range(0, state.M):
             for j in range(0, state.N):
+                #every time we get a stone of needed color call additional function
                 if (state.board[i][j] == color):
                     streak.insert(0, self.streak(state.board, i, j))
-        # TODO implement this
         streak.sort();
         return float(streak[len(streak)-1])/state.K
 
@@ -65,6 +61,7 @@ class EvaluationPlayer(Player):
         longest = 1
         x = i
         y = j
+        #check the longest streak:
         #in line
         for y in range(j+1, len(board[0]) - 1):
             if board[x][y] == board[i][j]:
@@ -85,7 +82,7 @@ class EvaluationPlayer(Player):
         longest = 1
         x = i+1
         y = j+1
-
+        #in l->r diagonal
         while (x < len(board)) and (y < len(board[0])):
             if board[x][y] == board[i][j]:
                 longest = longest + 1
@@ -95,7 +92,7 @@ class EvaluationPlayer(Player):
                 break
         if (longest > toreturn):
             toreturn = longest
-
+        #in r->l diagonal
         longest = 1
         x = i+1
         y = j-1
@@ -108,8 +105,5 @@ class EvaluationPlayer(Player):
                 break
         if (longest > toreturn):
             toreturn = longest
+        #return the biggest streak found from all directions
         return toreturn
-
-
-
-
